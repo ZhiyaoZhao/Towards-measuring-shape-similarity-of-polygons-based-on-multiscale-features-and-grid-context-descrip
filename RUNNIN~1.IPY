@@ -1,0 +1,137 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#coding=utf-8\n",
+    "\n",
+    "#including necessary package\n",
+    "import shapefile\n",
+    "\n",
+    "import shape_similarity\n",
+    "\n",
+    "#\n",
+    "interpolate_point = [1500,5000,10000]\n",
+    "\n",
+    "#reading data\n",
+    "#####\n",
+    "#myshp = open(\"...\\\\shape similarity\\\\experimental data\\\\Similar polygons retrieving test\\\\Max_planck.shp\", \"rb\")\n",
+    "\n",
+    "#mydbf = open(\"...\\\\shape similarity\\\\experimental data\\\\Similar polygons retrieving test\\\\Max_planck.dbf\", \"rb\")\n",
+    "#####\n",
+    "#myshp = open(\"...\\\\shape similarity\\\\experimental data\\\\Similar polygons retrieving test\\\\Hasenbergl.shp\", \"rb\")\n",
+    "\n",
+    "#mydbf = open(\"...\\\\shape similarity\\\\experimental data\\\\Similar polygons retrieving test\\\\Hasenbergl.dbf\", \"rb\")\n",
+    "\n",
+    "#Atihua dataset\n",
+    "#####\n",
+    "myshp = open(\"...\\\\shape similarity\\experimental data\\\\Comparison with TF method and Fourier descriptor\\\\atihuaCopy.shp\", \"rb\")\n",
+    "\n",
+    "mydbf = open(\"...\\\\shape similarity\\experimental data\\\\Comparison with TF method and Fourier descriptor\\\\atihuaCopy.dbf\", \"rb\")\n",
+    "#####\n",
+    "\n",
+    "#The Victory lake and the church footprint prints\n",
+    "#####\n",
+    "#myshp = open(\"...\\\\shape similarity\\\\experimental data\\\\sensitivity test\\\\sensitivity test.shp\", \"rb\")\n",
+    "\n",
+    "#mydbf = open(\"...\\\\shape similarity\\\\experimental data\\\\sensitivity test\\\\sensitivity test.dbf\", \"rb\")\n",
+    "#####\n",
+    "\n",
+    "\n",
+    "shapes = shapefile.Reader(shp=myshp, dbf=mydbf)\n",
+    "\n",
+    "shapep = shapes.shapes()\n",
+    "\n",
+    "recordp = shapes.records()\n",
+    "\n",
+    "shape_list = []\n",
+    "\n",
+    "for i in range(len(shapep)):\n",
+    "\n",
+    "    dic = {'osmid':[],'code':[],'fclass':[],'name':[],'typee':[],'shapetype':[],'point':[],'bbox':[],'parts':[],}\n",
+    "    #shape recording\n",
+    "    dic['osmid'] = recordp[i][0]\n",
+    "    dic['shapetype'] = shapep[i].shapeType\n",
+    "    for j in range(len(shapep[i].points)):\n",
+    "        dic.setdefault('point',[]).append(shapep[i].points[j])\n",
+    "    dic['bbox'] = shapep[i].bbox\n",
+    "    dic['parts'] = shapep[i].parts\n",
+    "    \n",
+    "    if (len(shapep[i].points)) > 2:\n",
+    "               \n",
+    "        shape_list.append(dic);\n",
+    "            \n",
+    "for j in range(len(shape_list)):\n",
+    "    \n",
+    "    point1 = shape_list[j]['point']\n",
+    "    \n",
+    "    delet_point_index_list = []\n",
+    "    \n",
+    "    part_list = list(shapep[j].parts)\n",
+    "\n",
+    "    part_list.append(len(point1)-1)\n",
+    "\n",
+    "    delet_count = 0"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\94469\\Desktop\\shape similarity\\Python code\\shape_similarity.py:1065: RuntimeWarning: invalid value encountered in double_scalars\n",
+      "  C = (C - average * average)/(deltaX * deltaY)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "0.8982820705909442"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "shape_similarity.shape_similarity_mut(shape_list[0],shape_list[1],interpolate_point)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
