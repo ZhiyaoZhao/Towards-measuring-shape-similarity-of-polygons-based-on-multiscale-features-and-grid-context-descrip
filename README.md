@@ -27,3 +27,11 @@ py file named Running_test.
 3. The second step is to input opreation order in the console, such as "shape_similarity.shape_similarity_mut(shape_list[0],shape_list[1],interpolate_point)". 
 
 4. If you want to calculate shape similarity betwent the first polygon and the sixth polygon, you could input "shape_similarity.shape_similarity_mut(shape_list[0],shape_list[5],interpolate_point)".
+
+#REFERENCE:
+
+If you use this work in your research, please reference this paper:
+
+--------------------------------------------------------------------------------
+ Fan, Hongchao; Zhao, Zhiyao; Li, Wenwen. 2021. "Towards Measuring Shape Similarity of Polygons Based on Multiscale Features and Grid Context Descriptors"
+ ISPRS Int. J. Geo-Inf. 10, no. 5: 279. https://doi.org/10.3390/ijgi10050279
